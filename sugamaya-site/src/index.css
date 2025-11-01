@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply text-gray-900 font-body antialiased;
+  /* Subtle tricolor background with light texture */
+  background:
+    /* soft paper texture */
+    repeating-linear-gradient(180deg, rgba(11,27,59,0.035) 0px, rgba(11,27,59,0.035) 2px, transparent 2px, transparent 6px),
+    /* white base */
+    linear-gradient(0deg, #ebdfb7 0%, #ffffff 100%),
+    /* saffron glow top-left */
+    radial-gradient(1200px 800px at -10% -10%, rgba(234, 159, 85, 0.3), transparent 60%),
+    /* green glow bottom-right */
+    radial-gradient(1200px 800px at 110% 110%, rgba(12, 122, 3, 0.28), transparent 80%),
+    /* faint tricolor wash across page */
+    conic-gradient(from 270deg at 50% 50%, rgba(233, 158, 83, 0.18) 0deg, rgba(143, 130, 130, 0) 120deg, rgba(21, 223, 3, 0.18) 240deg, rgba(234, 175, 116, 0.18) 360deg);
+  background-blend-mode: soft-light, normal, normal, normal, soft-light;
+  animation: bgReveal 1200ms ease-in-out both;
+}
+
+.brand-gradient {
+  background: linear-gradient(90deg, #FF9933 0%, #ffffff 50%, #138808 100%);
+}
+
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+@keyframes bgReveal {
+  0% {
+    opacity: 0;
+    background-position:
+      0 0,
+      0 0,
+      20% 20%,
+      80% 80%,
+      50% 50%;
+  }
+  100% {
+    opacity: 1;
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      100% 100%,
+      50% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+}
+
