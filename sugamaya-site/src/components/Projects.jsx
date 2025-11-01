@@ -1,3 +1,13 @@
+import { Link } from 'react-router-dom'
+
+// Helper function to create slug from title
+function createSlug(title) {
+  return title.toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+}
+
 const items = [
   {
     title: 'Bio Hacking Luxe',
@@ -33,7 +43,7 @@ const items = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 sm:py-28 bg-gradient-to-b from-[#eed8bb] to-[#d6edd6]">
+    <section id="projects" className="py-20 sm:py-28 bg-gradient-to-b from-[#FFEDCD] to-[#95b595]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <h2 className="font-heading text-4xl sm:text-5xl font-extrabold text-navy text-center">
@@ -66,12 +76,12 @@ export default function Projects() {
                   <h3 className="text-xl font-semibold text-gray-900">{p.title}</h3>
                   <p className="mt-2 text-sm text-gray-600 leading-relaxed">{p.desc}</p>
                 </div>
-                <a
-                  href="#"
-                  className="mt-4 inline-flex text-indigo-600 font-semibold text-sm hover:underline self-start"
+                <Link
+                  to={`/products/${createSlug(p.title)}`}
+                  className="mt-4 inline-flex text-primary font-semibold text-sm hover:underline self-start focus-ring"
                 >
                   Know More →
-                </a>
+                </Link>
               </div>
             </article>
           ))}

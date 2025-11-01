@@ -117,21 +117,28 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="relative py-20 sm:py-28">
-      {/* Soft tricolor radial background glow */}
+    <section
+      id="about"
+      className="relative py-20 sm:py-28 overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(255, 248, 235, 0.9) 0%, rgba(255, 243, 220, 0.95) 50%, rgba(255, 237, 205, 1) 100%)",
+      }}
+    >
+      {/* Soft tricolor radial glow for subtle depth */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
-          className="absolute -top-24 -left-24 h-[28rem] w-[28rem] rounded-full"
+          className="absolute top-0 right-0 h-[30rem] w-[30rem] rounded-full opacity-30 blur-3xl"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(255,153,51,0.18), transparent)",
+              "radial-gradient(circle at top right, rgba(255,153,51,0.3), transparent 70%)",
           }}
         />
         <div
-          className="absolute -bottom-28 -right-28 h-[32rem] w-[32rem] rounded-full"
+          className="absolute bottom-0 left-0 h-[28rem] w-[28rem] rounded-full opacity-20 blur-3xl"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(22,153,10,0.16), transparent)",
+              "radial-gradient(circle at bottom left, rgba(22,153,10,0.25), transparent 70%)",
           }}
         />
       </div>
@@ -143,7 +150,7 @@ export default function About() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
           {points.map((p, idx) => {
-            const from = idx % 2 === 0 ? "translate-x-12" : "-translate-x-12"; // alternate directions
+            const from = idx % 2 === 0 ? "translate-x-12" : "-translate-x-12";
             const base = "opacity-0 " + from;
             const shown = "opacity-100 translate-x-0";
             return (
@@ -151,7 +158,7 @@ export default function About() {
                 key={p.title}
                 ref={(el) => (cardRefs.current[idx] = el)}
                 data-index={idx}
-                className={`rounded-2xl bg-white p-8 w-full sm:w-[90%] h-52 sm:h-56 border border-gray-100 transition-all duration-700 ease-out will-change-transform flex flex-col justify-center shadow-md ${
+                className={`rounded-2xl bg-white p-8 w-full sm:w-[90%] h-56 border border-gray-100 transition-all duration-700 ease-out will-change-transform flex flex-col justify-center shadow-md ${
                   visible[idx] ? shown : base
                 } hover:-translate-y-2 hover:shadow-xl`}
               >

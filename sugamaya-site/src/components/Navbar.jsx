@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom'
+
 export default function Navbar() {
     return (
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur transition-all duration-300">
+      <header className="sticky top-0 z-50 bg-#FFEDCD backdrop-blur transition-all duration-300">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
           {/* Outer border with tricolor gradient */}
           <div className="rounded-full p-[2px] bg-gradient-to-r from-[#FF9933] via-white to-[#138808] shadow-md">
@@ -11,8 +13,8 @@ export default function Navbar() {
             >
               {/* Logo + Title */}
               <div className="flex items-center gap-3">
-                <a
-                  href="#home"
+                <Link
+                  to="/"
                   className="inline-flex items-center gap-2 focus-ring"
                   aria-label="Sugamaya Governance home"
                 >
@@ -28,7 +30,7 @@ export default function Navbar() {
                     <span className="text-[#FF9933]">maya </span>
                     <span className="text-[#138808]">Governance</span>
                   </span>
-                </a>
+                </Link>
               </div>
   
               {/* Navigation Links */}

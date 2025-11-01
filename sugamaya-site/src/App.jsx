@@ -1,22 +1,15 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Services from './components/Services'
-import About from './components/About'
-import Projects from './components/Projects'
-import ContactFooter from './components/ContactFooter'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import ProductDetail from './pages/ProductDetail'
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1">
-        <Hero />
-        <Services />
-        <About />
-        <Projects />
-        <ContactFooter />
-      </main>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products/:slug" element={<ProductDetail />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

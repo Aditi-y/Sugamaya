@@ -36,17 +36,25 @@
 //     </section>
 //   )}
 
-
 import { useEffect, useRef, useState } from "react";
 
 export default function Hero() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [animateTitle, setAnimateTitle] = useState(false);
+  const [animateSubtitle, setAnimateSubtitle] = useState(false);
   const titleRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
+        if (entry.isIntersecting) {
+          // Animate title first
+          setAnimateTitle(true);
+
+          // Then trigger subtitle after slight delay
+          setTimeout(() => {
+            setAnimateSubtitle(true);
+          }, 800);
+        }
       },
       { threshold: 0.3 }
     );
@@ -59,12 +67,16 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-gradient-to-b from-white to-ash"
+      className="relative overflow-hidden"
+      style={{
+        background:
+          "radial-gradient(circle at 30% 20%, rgba(255,153,51,0.25) 0%, rgba(255,255,255,0.9) 40%, rgba(19,136,8,0.25) 100%)",
+      }}
     >
-      {/* Background gradients */}
+      {/* Decorative background glows */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
-          className="absolute -top-20 -right-20 h-64 w-64 rounded-full opacity-10 blur-3xl"
+          className="absolute -top-20 -right-20 h-64 w-64 rounded-full opacity-20 blur-3xl"
           style={{
             background: "conic-gradient(from 0deg, #FF9933, #138808)",
           }}
@@ -75,7 +87,6 @@ export default function Hero() {
       {/* Main content */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="flex flex-col items-center text-center">
-
           {/* Logo */}
           <div className="relative mb-8">
             <div className="h-24 w-24 sm:h-28 sm:w-28 rounded-full shadow-soft bg-white grid place-content-center ring-2 ring-emerald/30">
@@ -94,11 +105,13 @@ export default function Hero() {
             />
           </div>
 
-          {/* Title with dark saffron-green gradient */}
+          {/* Title with saffron-green gradient text */}
           <h1
             ref={titleRef}
-            className={`font-heading text-4xl sm:text-6xl font-black tracking-tight text-transparent bg-clip-text transition-all duration-[1200ms] ease-out ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            className={`font-heading text-4xl sm:text-6xl font-black tracking-tight text-transparent bg-clip-text transition-all duration-1000 ease-out transform ${
+              animateTitle
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
             }`}
             style={{
               backgroundImage:
@@ -108,22 +121,28 @@ export default function Hero() {
             SUGAMAYA GOVERNANCE
           </h1>
 
-          {/* Subheadline */}
+          {/* Subtitle - fades in after title */}
           <p
-            className={`mt-4 max-w-2xl text-base sm:text-lg text-gray-700 transition-opacity duration-700 delay-300 ${
-              isVisible ? "opacity-100" : "opacity-0"
+            className={`mt-4 max-w-2xl text-base sm:text-lg text-gray-700 transition-all duration-1000 ease-out transform ${
+              animateSubtitle
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
             }`}
             style={{
               fontFamily: "'Times New Roman', Times, serif",
             }}
           >
-            Transform your ideas into powerful digital products with our expert development team. Fast, reliable, and scalable solutions for startups and businesses.
+            Transform your ideas into powerful digital products with our expert
+            development team. Fast, reliable, and scalable solutions for startups
+            and businesses.
           </p>
 
-          {/* Buttons */}
+          {/* Buttons - appear after subtitle */}
           <div
-            className={`mt-8 flex flex-wrap justify-center gap-3 transition-opacity duration-700 delay-500 ${
-              isVisible ? "opacity-100" : "opacity-0"
+            className={`mt-8 flex flex-wrap justify-center gap-3 transition-all duration-700 ease-out ${
+              animateSubtitle
+                ? "opacity-100 translate-y-0 delay-500"
+                : "opacity-0 translate-y-5"
             }`}
           >
             <a
